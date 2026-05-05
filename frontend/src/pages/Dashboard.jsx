@@ -9,7 +9,7 @@ import {
 } from 'lucide-react';
 import UserCard from '../Components/UserCard';
 
-const API = 'http://localhost:8000';
+const API = 'https://mentalwatch-production.up.railway.app';
 
 function StatCard({ icon: Icon, label, value, color, sub }) {
   return (

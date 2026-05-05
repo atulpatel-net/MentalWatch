@@ -7,7 +7,7 @@ import {
 } from 'recharts';
 import axios from 'axios';
 
-const API = 'http://localhost:8000';
+const API = 'https://mentalwatch-production.up.railway.app';
 
 const UserPage = () => {
   const { username } = useParams();
