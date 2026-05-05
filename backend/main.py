@@ -86,7 +86,7 @@ def reload_cache_endpoint():
     raise HTTPException(status_code=500, detail="Failed to reload cache")
 
 class BuildRequest(BaseModel):
-    filename: str = "test_100_users_sample.csv"  # default to sample
+    filename: str = "final_dataset_5to7_posts_12000.csv"  # default to 12k
 
 
 @app.post("/cache/build")
