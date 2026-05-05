@@ -7,7 +7,7 @@ import {
   Minus, RefreshCw, Database, Users, BarChart3, Zap,
   Clock, Filter, ChevronDown, Loader2, Brain, Settings
 } from 'lucide-react';
-import UserCard from '../components/UserCard';
+import UserCard from '../Components/UserCard';
 
 const API = 'http://localhost:8000';
 
