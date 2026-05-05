@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+.env*
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+venv/
+env/
+.pytest_cache/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Misc
+.agents/
