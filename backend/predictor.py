@@ -9,12 +9,12 @@ import os
 BASE_DIR   = os.path.dirname(os.path.abspath(__file__))
 PCA_PATH   = os.path.join(BASE_DIR, "models", "pca_modeld.pkl")
 XGB_PATH   = os.path.join(BASE_DIR, "models", "xgboost_modeld.pkl")
-BERT_NAME  = "mental/mental-bert-base-uncased"
+BERT_NAME  = "distilbert-base-uncased"
 
 # ── singleton loader (cached so models load once) ──────────────────────────
 @lru_cache(maxsize=1)
 def _load_models():
-    print("[predictor] Loading MentalBERT...")
+    print(f"[predictor] Loading {BERT_NAME}...")
     tokenizer = AutoTokenizer.from_pretrained(BERT_NAME)
     bert      = AutoModel.from_pretrained(BERT_NAME)
     bert.eval()

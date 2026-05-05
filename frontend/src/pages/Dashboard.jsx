@@ -7,7 +7,7 @@ import {
   Minus, Brain, Loader2, UploadCloud, FileText, Database,
   Cpu, PenLine, Plus, Trash2, CheckCircle2, Search, AlertCircle, Users, Clock
 } from 'lucide-react';
-import UserCard from '../Components/UserCard';
+import UserCard from '../components/UserCard';
 
 const API = 'http://localhost:8000';
 

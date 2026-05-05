@@ -1,9 +1,8 @@
 fastapi
 uvicorn
-gunicorn
 praw
 transformers
-torch>=2.0.0
+torch>=2.6.0
 scikit-learn
 xgboost
 numpy
@@ -11,4 +10,6 @@ pandas
 joblib
 python-dotenv
 openpyxl
+
+
 datasets==2.19.0

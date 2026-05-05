@@ -7,7 +7,7 @@ import {
   Minus, RefreshCw, Database, Users, BarChart3, Zap,
   Clock, Filter, ChevronDown, Loader2, Brain, Settings
 } from 'lucide-react';
-import UserCard from '../Components/UserCard';
+import UserCard from '../components/UserCard';
 
 const API = 'http://localhost:8000';
 
@@ -143,7 +143,7 @@ const DemoPage = () => {
   const [riskFilter, setRiskFilter]   = useState('All');
   const [sampleSize, setSampleSize]   = useState(20);
   const [availableFiles, setAvailableFiles] = useState([]);
-  const [selectedFile, setSelectedFile]     = useState('final_dataset_5to7_posts_12000.csv');
+  const [selectedFile, setSelectedFile]     = useState('test_100_users_sample.csv');
   const [pollTimer, setPollTimer]     = useState(null);
   const [showExportMenu, setShowExportMenu] = useState(false);
 
