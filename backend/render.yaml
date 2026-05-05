@@ -16,3 +16,5 @@ services:
         sync: false
       - key: REDDIT_USER_AGENT
         value: mental-health-monitor/1.0
+      - key: WEB_CONCURRENCY
+        value: 1
