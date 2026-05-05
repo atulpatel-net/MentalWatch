@@ -10,6 +10,7 @@ pandas
 joblib
 python-dotenv
 openpyxl
+python-multipart
 
 
 datasets==2.19.0
