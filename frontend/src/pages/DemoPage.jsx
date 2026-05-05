@@ -143,7 +143,7 @@ const DemoPage = () => {
   const [riskFilter, setRiskFilter]   = useState('All');
   const [sampleSize, setSampleSize]   = useState(20);
   const [availableFiles, setAvailableFiles] = useState([]);
-  const [selectedFile, setSelectedFile]     = useState('final_dataset_5to7_posts_12000.csv');
+  const [selectedFile, setSelectedFile]     = useState('dataset_5000.csv');
   const [pollTimer, setPollTimer]     = useState(null);
   const [showExportMenu, setShowExportMenu] = useState(false);
 
