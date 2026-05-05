@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+praw
+transformers
+torch>=2.6.0
+scikit-learn
+xgboost
+numpy
+pandas
+joblib
+python-dotenv
+
+
+datasets==2.19.0
