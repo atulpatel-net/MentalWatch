@@ -5,7 +5,7 @@ import axios from 'axios';
 import {
   AlertTriangle, ShieldCheck, Activity, TrendingUp, TrendingDown,
   Minus, Brain, Loader2, UploadCloud, FileText, Database,
-  PenLine, Plus, Trash2, CheckCircle2, Search, AlertCircle, Users, Clock
+  Cpu, PenLine, Plus, Trash2, CheckCircle2, Search, AlertCircle, Users, Clock
 } from 'lucide-react';
 import UserCard from '../Components/UserCard';
 
@@ -63,7 +63,56 @@ const CsvTab = ({ onResult, loading, setLoading }) => {
   );
 };
 
+const HuggingFaceTab = ({ onResult, loading, setLoading }) => {
+  const [subreddit, setSubreddit] = useState('');
+  const [limit, setLimit] = useState(100);
+  const [error, setError] = useState(null);
+  const categories = ['depression', 'adhd', 'ptsd', 'ocd', 'aspergers'];
 
+  const handleAnalyze = async () => {
+    setLoading(true); setError(null);
+    try { const { data } = await axios.post(`${API}/analyze/dataset`, { subreddit: subreddit.trim() || null, limit: Number(limit) }); onResult(data); } catch (e) { setError('Streaming failed.'); } finally { setLoading(false); }
+  };
+
+  return (
+    <div className="tab-body">
+      <div className="hf-badge"><Cpu size={14} /> solomonk/reddit_mental_health_posts</div>
+      <p className="tab-desc">Streams the public HuggingFace dataset. Select a category below or type a keyword.</p>
+      
+      <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+        <label className="form-label">Available Categories</label>
+        <div className="category-suggestions" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
+          {categories.map(cat => (
+            <button 
+              key={cat} 
+              className={`cat-suggest-btn ${subreddit === cat ? 'active' : ''}`}
+              onClick={() => setSubreddit(cat)}
+              style={{
+                padding: '0.4rem 0.8rem',
+                borderRadius: '999px',
+                border: '1px solid var(--border-glass)',
+                background: subreddit === cat ? 'var(--accent-primary)' : 'var(--bg-glass)',
+                color: subreddit === cat ? '#fff' : 'var(--text-secondary)',
+                fontSize: '0.8rem',
+                cursor: 'pointer',
+                transition: 'all 0.2s'
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="form-row">
+        <div className="form-group" style={{ flex: 2 }}><label className="form-label">Search Keyword</label><input className="form-input" placeholder="e.g. depression" value={subreddit} onChange={(e) => setSubreddit(e.target.value)} /></div>
+        <div className="form-group" style={{ flex: 1 }}><label className="form-label">Post limit</label><select className="form-input form-select" value={limit} onChange={(e) => setLimit(e.target.value)}>{[50, 100, 200, 500].map(n => <option key={n} value={n}>{n} posts</option>)}</select></div>
+      </div>
+      <ErrorBox msg={error} />
+      <AnalyzeBtn onClick={handleAnalyze} disabled={false} loading={loading} label="Stream & Analyze" />
+    </div>
+  );
+};
 
 const RedditTab = ({ onResult, loading, setLoading }) => {
   const [subreddit, setSubreddit] = useState('');
@@ -341,6 +390,7 @@ const Dashboard = () => {
   if (!analyzedData) {
     const TABS = [
       { id: 'csv', label: 'Dataset Upload', icon: FileText, color: '#3b82f6' },
+      { id: 'huggingface', label: 'HuggingFace', icon: Cpu, color: '#ff9d00' },
       { id: 'reddit', label: 'Reddit API', icon: Database, color: '#ff4500' },
       { id: 'manual', label: 'Manual Entry', icon: PenLine, color: '#10b981' },
     ];
@@ -362,6 +412,7 @@ const Dashboard = () => {
           </div>
           <div className="tab-content">
             {activeTab === 'csv' && <CsvTab {...sharedProps} />}
+            {activeTab === 'huggingface' && <HuggingFaceTab {...sharedProps} />}
             {activeTab === 'reddit' && <RedditTab {...sharedProps} />}
             {activeTab === 'manual' && <ManualTab {...sharedProps} />}
           </div>
