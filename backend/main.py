@@ -8,7 +8,6 @@ from pydantic import BaseModel
 
 from data_loader import (
     load_from_file,
-    load_from_huggingface,
     load_from_reddit,
     reddit_api_status,
 )
@@ -86,7 +85,7 @@ def reload_cache_endpoint():
     raise HTTPException(status_code=500, detail="Failed to reload cache")
 
 class BuildRequest(BaseModel):
-    filename: str = "dataset_5000.csv"  # 5k rows for RAM safety
+    filename: str = "dataset_12000.csv"  # 12k rows (increased from 5k)
 
 
 @app.post("/cache/build")
@@ -210,47 +209,6 @@ async def analyze_csv(file: UploadFile = File(...)):
     return _run_pipeline(posts, {"source": "file_upload", "filename": file.filename})
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# MODE 2 — HuggingFace Dataset
-# ══════════════════════════════════════════════════════════════════════════════
-class HFRequest(BaseModel):
-    subreddit: str = None   # optional keyword filter e.g. "depression"
-    limit: int = 200
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-# MODE 4 — Manual Text Entry
-# ══════════════════════════════════════════════════════════════════════════════
-class ManualPost(BaseModel):
-    username: str
-    post_text: str
-    timestamp: str = None   # ISO string or Unix int as string
-
-
-class ManualRequest(BaseModel):
-    posts: list[ManualPost]
-
-
-@app.post("/analyze/dataset")
-def analyze_dataset(req: HFRequest):
-    """
-    Streams solomonk/reddit_mental_health_posts from HuggingFace.
-    Optionally filter by subreddit keyword.
-    """
-    try:
-        posts = load_from_huggingface(
-            subreddit_filter=req.subreddit,
-            limit=req.limit,
-        )
-    except (ValueError, RuntimeError) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return _run_pipeline(posts, {
-        "source":    "huggingface",
-        "dataset":   "solomonk/reddit_mental_health_posts",
-        "subreddit": req.subreddit or "all",
-    })
-
 
 # ══════════════════════════════════════════════════════════════════════════════
 # MODE 3 — Reddit Live API
@@ -282,6 +240,16 @@ def analyze_reddit(req: RedditRequest):
 # ══════════════════════════════════════════════════════════════════════════════
 # MODE 4 — Manual Text
 # ══════════════════════════════════════════════════════════════════════════════
+class ManualPost(BaseModel):
+    username: str
+    post_text: str
+    timestamp: str = None   # ISO string or Unix int as string
+
+
+class ManualRequest(BaseModel):
+    posts: list[ManualPost]
+
+
 @app.post("/analyze/manual")
 def analyze_manual(req: ManualRequest):
     """
