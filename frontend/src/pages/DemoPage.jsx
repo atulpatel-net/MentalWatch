@@ -8,8 +8,8 @@ import {
   Clock, Filter, ChevronDown, Loader2, Brain, Settings
 } from 'lucide-react';
 import UserCard from '../Components/UserCard';
+import API from '../api';
 
-const API = 'https://mentalwatch-production.up.railway.app';
 
 function StatCard({ icon: Icon, label, value, color, sub }) {
   return (

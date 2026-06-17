@@ -6,8 +6,8 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine
 } from 'recharts';
 import axios from 'axios';
+import API from '../api';
 
-const API = 'https://mentalwatch-production.up.railway.app';
 
 const UserPage = () => {
   const { username } = useParams();

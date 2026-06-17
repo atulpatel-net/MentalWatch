@@ -5,8 +5,8 @@ import axios from 'axios';
 import {
   AlertCircle, CheckCircle2, Loader2, UploadCloud, FileText
 } from 'lucide-react';
+import API from '../api';
 
-const API = 'https://mentalwatch-production.up.railway.app';
 
 const ErrorBox = ({ msg }) => msg ? <div className="input-error"><AlertCircle size={15} />{msg}</div> : null;
 const AnalyzeBtn = ({ onClick, disabled, loading, label = 'Analyze' }) => (

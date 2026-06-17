@@ -8,8 +8,8 @@ import {
   Cpu, PenLine, Plus, Trash2, CheckCircle2, Search, AlertCircle, Users, Clock
 } from 'lucide-react';
 import UserCard from '../Components/UserCard';
+import API from '../api';
 
-const API = 'https://mentalwatch-production.up.railway.app';
 
 function StatCard({ icon: Icon, label, value, color, sub }) {
   return (
