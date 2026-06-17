@@ -63,7 +63,7 @@ def build_cache(csv_path: str, batch_size: int = 50):
     global _cache, _build_progress
 
     import pandas as pd
-    from data_loader import load_from_csv
+    from data_loader import load_from_file
     from predictor import predict_posts, group_by_user
 
     with _lock:
@@ -74,7 +74,7 @@ def build_cache(csv_path: str, batch_size: int = 50):
         with open(csv_path, "rb") as f:
             raw = f.read()
 
-        posts = load_from_csv(raw, os.path.basename(csv_path))
+        posts = load_from_file(raw, os.path.basename(csv_path))
         total = len(posts)
         print(f"[cache] {total} valid posts to process")
 

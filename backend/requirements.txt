@@ -1,8 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 fastapi
 uvicorn
 praw
 transformers
-torch>=2.6.0
+torch>=2.2.0
 scikit-learn
 xgboost
 numpy
@@ -11,6 +12,4 @@ joblib
 python-dotenv
 openpyxl
 python-multipart
-
-
 datasets==2.19.0
