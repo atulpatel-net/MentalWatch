@@ -121,11 +121,25 @@ const RedditTab = ({ onResult, loading, setLoading }) => {
   const handleAnalyze = async () => {
     if (!subreddit.trim()) return;
     setLoading(true); setError(null);
-    try { const { data } = await axios.post(`${API}/analyze/reddit`, { subreddit: subreddit.trim(), limit: Number(limit) }); onResult(data); } catch (e) { setError('Reddit API error.'); } finally { setLoading(false); }
+    try { 
+      const { data } = await axios.post(`${API}/analyze/dataset`, { 
+        subreddit: subreddit.trim(), 
+        limit: Number(limit) 
+      }); 
+      onResult(data); 
+    } catch (e) { 
+      setError('Failed to load demonstration data.'); 
+    } finally { 
+      setLoading(false); 
+    }
   };
   return (
     <div className="tab-body">
-      <p className="tab-desc">Fetch live posts from any public subreddit using the Reddit API.</p>
+      <div className="reddit-status-banner status-amber" style={{ marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <AlertTriangle size={18} />
+        <span>Live Reddit API integration is under development. Currently, demonstration data is used to showcase the analytics pipeline.</span>
+      </div>
+      <p className="tab-desc">Fetch posts from any public subreddit using demonstration data.</p>
       <div className="form-row">
         <div className="form-group" style={{ flex: 2 }}><label className="form-label">Subreddit name</label><input className="form-input" placeholder="depression" value={subreddit} onChange={(e) => setSubreddit(e.target.value)} /></div>
         <div className="form-group" style={{ flex: 1 }}><label className="form-label">Post limit</label><select className="form-input form-select" value={limit} onChange={(e) => setLimit(e.target.value)}>{[25, 50, 100, 200].map(n => <option key={n} value={n}>{n} posts</option>)}</select></div>
