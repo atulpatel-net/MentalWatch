@@ -6,6 +6,6 @@ const isLocal = window.location.hostname === 'localhost' || window.location.host
 // If running locally, point to the local backend. Otherwise, use the production URL.
 const API_URL = isLocal 
   ? 'http://localhost:8000' 
-  : 'https://mentalwatch-production.up.railway.app';
+  : 'https://mentalwatch-2.onrender.com';
 
 export default API_URL;
