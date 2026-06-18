@@ -135,12 +135,9 @@ MentalWatch/
 │
 ├── frontend/
 ├── backend/
-├── dataset/
-├── models/
-├── notebooks/
-├── screenshots/
 ├── README.md
-└── requirements.txt
+└── .gitignore
+
 ```
 
 ---
